@@ -1,0 +1,24 @@
+module.exports = (sequelize, DataTypes) => {
+    const category_book_mapping = sequelize.define('category_book_mapping',{
+        publication_book_mapping_id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            field:'category_book_mapping_id'
+        },
+        category_id: {
+            type: DataTypes.INTEGER,
+            field: 'category_id'
+        },
+        book_id: {
+            type: DataTypes.INTEGER,
+            field: 'book_id'
+        }
+
+    }, {
+        createdAt: 'created_at',
+        updatedAt: 'updated_at',
+        tablename: 'category_book_mapping'
+    });
+    return category_book_mapping;
+}
