@@ -4,12 +4,12 @@ const Feedback = db.feedback;
 
 exports.createFeedback = (req, res) => {
     // Validate request
-    if (!req.body.feedback_Id) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
+    /* if (!req.body.feedback_Id) {
+         res.status(400).send({
+             message: "Content can not be empty!"
+         });
+         return;
+     }*/
     // Create a Feedback
     const feedback = {
         feedback_Id: req.body.feedback_Id,
@@ -54,6 +54,23 @@ exports.findOne = (req, res) => {
         });
 };
 
+
+exports.findAll = (req, res) => {
+    const title = req.query.id;
+    console.log(title);
+    var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
+    console.log(condition);
+    Feedback.findAll({ where: condition })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving users."
+            });
+        });
+};
 
 exports.update = (req, res) => {
     const id = req.params.id;

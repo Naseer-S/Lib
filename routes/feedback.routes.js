@@ -6,6 +6,7 @@ router.post("/feedbacks", feedbacks.createFeedback);
 
 // Get a feedback with id
 router.get("/feedbacks/:id", feedbacks.findOne);
+router.get("/feedbacks", feedbacks.findAll);
 
 // Update a feedback with id
 router.put("/feedbacks/:id", feedbacks.update);

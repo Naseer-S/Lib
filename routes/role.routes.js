@@ -5,6 +5,7 @@ var router = require("express").Router();
 router.post("/roles", roles.createRole);
 
 router.get("/roles/:id", roles.findOne);
+router.get("/roles", roles.findAll);
 
 router.put("/roles/:id", roles.update);
 

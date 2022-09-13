@@ -9,6 +9,7 @@ const app = express();
 const userRoutes = require("./routes/user.routes");
 const feedbackRoutes = require("./routes/feedback.routes.js")
 const roleRoutes = require("./routes/role.routes");
+const bookRoutes = require("./routes/book.routes");
 
 const db = require("./models/index.js");
 db.sequelize.sync()
@@ -29,6 +30,8 @@ app.use(bodyParser.json());
 app.use('/api', userRoutes);
 app.use('/api', feedbackRoutes);
 app.use('/api', roleRoutes);
+app.use('/api', bookRoutes);
+
 app.listen(3000, function () {
     console.log("Server is running on localhost:3000");
 });

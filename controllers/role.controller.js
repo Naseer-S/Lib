@@ -1,19 +1,19 @@
 const db = require("../models");
 const Role = db.role;
 
-
 exports.createRole = (req, res) => {
     // Validate request
-    if (!req.body.role_Id) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
+    /*   if (!req.body.role_Id) {
+           res.status(400).send({
+               message: "Content can not be empty!"
+           });
+           return;
+       }*/
     // Create a Role
     const role = {
         role_Id: req.body.role_Id,
         role_Name: req.body.role_Name,
+        user_Id: req.body.user_Id,
 
     };
     // Save role in the database
@@ -28,7 +28,6 @@ exports.createRole = (req, res) => {
             });
         });
 };
-
 
 exports.findOne = (req, res) => {
     const id = req.params.id;
@@ -49,6 +48,23 @@ exports.findOne = (req, res) => {
         });
 };
 
+
+exports.findAll = (req, res) => {
+    const title = req.query.id;
+    console.log(title);
+    var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
+    console.log(condition);
+    Role.findAll({ where: condition })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving roles."
+            });
+        });
+};
 
 exports.update = (req, res) => {
     const id = req.params.id;

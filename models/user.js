@@ -1,8 +1,10 @@
+//const bcrypt = require("bcrypt")
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define("user", {
     user_Id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      serial: true,
       autoIncrement: true,
       field: 'user_Id'
     },
@@ -26,6 +28,12 @@ module.exports = (sequelize, DataTypes) => {
       field: 'date_Of_birth'
 
     },
+
+    user_role: {
+      type: DataTypes.STRING,
+      field: 'user_role'
+    },
+
     contact_Number: {
       type: DataTypes.STRING,
       field: 'contact_Number'
@@ -41,5 +49,12 @@ module.exports = (sequelize, DataTypes) => {
       field: 'address'
     }
   });
+
+  User.associate = (models) => {
+    User.belongsTo(models.role, {
+      foreignKey: "role_Id",
+    });
+
+  }
   return User;
 };

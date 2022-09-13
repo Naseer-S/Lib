@@ -1,14 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
-    const feedback = sequelize.define("feedback",{
+    const feedback = sequelize.define("feedback", {
         feedback_Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
-            field:'feedback_id'
+            serial: true,
+            field: 'feedback_id'
         },
         rating: {
             type: DataTypes.INTEGER,
-            field:'rating'
+            field: 'rating'
         },
         feedback: {
             type: DataTypes.STRING,
